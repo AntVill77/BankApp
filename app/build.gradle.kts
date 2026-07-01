@@ -2,8 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id ("kotlin-kapt")
-    id ("com.google.dagger.hilt.android")
+    alias(libs.plugins.hilt)
+
+    kotlin("kapt")
 }
 
 android {
@@ -18,6 +19,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders["appAuthRedirectScheme"] = "com.example.bankapp"
     }
 
     buildTypes {
@@ -68,6 +71,8 @@ dependencies {
     implementation(libs.okhttp)
 
     implementation(libs.logging)
+
+    implementation(libs.appauth)
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))

@@ -23,6 +23,12 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <data
+
+                    android:scheme="com.ant.bankapp"
+
+                    android:host="oauth2redirect"/>
             </intent-filter>
         </activity>
     </application>
