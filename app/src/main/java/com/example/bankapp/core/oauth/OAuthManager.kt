@@ -60,23 +60,15 @@ class OAuthManager(
 
         )
             .setScopes(
-
                 "openid",
-
                 "profile",
-
                 "email"
-
             )
             .build()
 
     }
 
-    fun login(
-
-        activity: Activity
-
-    ){
+    fun login(activity: Activity){
         val intent =
 
             authService

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.hilt)
 
     kotlin("kapt")
@@ -9,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.example.bankapp"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.example.bankapp"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -73,6 +74,17 @@ dependencies {
     implementation(libs.logging)
 
     implementation(libs.appauth)
+
+    implementation(libs.androidx.browser)
+
+    implementation(libs.androidx.security.crypto)
+    implementation(libs.androidx.datastore)
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
+
+    implementation(libs.kotlinx.coroutines.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))

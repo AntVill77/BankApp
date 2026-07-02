@@ -1,9 +1,11 @@
 package com.example.bankapp.presentation.login
 
+import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bankapp.domain.usecase.GetUserUseCase
+import com.example.bankapp.domain.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -11,15 +13,20 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
 
-    private val getUserUseCase: GetUserUseCase
+    private val loginUseCase: LoginUseCase
 
 ): ViewModel(){
 
+    fun login(activity: Activity) {
+
+        loginUseCase(activity)
+
+    }
     fun test(){
 
         viewModelScope.launch {
 
-            val user = getUserUseCase()
+            val user = loginUseCase
 
             Log.d("USER",user.toString())
 

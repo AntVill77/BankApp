@@ -1,5 +1,7 @@
 package com.example.bankapp.data.repository
 
+import android.app.Activity
+import com.example.bankapp.core.oauth.OAuthManager
 import com.example.bankapp.data.remote.AuthApi
 import com.example.bankapp.domain.model.User
 import com.example.bankapp.domain.repository.AuthRepository
@@ -7,23 +9,13 @@ import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
 
-    private val api: AuthApi
+    private val oauthManager: OAuthManager
 
-): AuthRepository {
+) : AuthRepository {
 
-    override suspend fun getUser(): User {
+    override fun login(activity: Activity) {
 
-        val response = api.getUser()
-
-        return User(
-
-            response.id,
-
-            response.name,
-
-            response.email
-
-        )
+        oauthManager.login(activity)
 
     }
 

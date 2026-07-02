@@ -1,14 +1,21 @@
 package com.example.bankapp.domain.usecase
 
+import android.app.Activity
 import com.example.bankapp.domain.repository.AuthRepository
 import javax.inject.Inject
 
-class GetUserUseCase @Inject constructor(
+class LoginUseCase @Inject constructor(
 
     private val repository: AuthRepository
 
 ) {
 
-    //suspend operator fun invoke() = repository.uthgetUser()
+    operator fun invoke(
+        activity: Activity
+    ) {
+
+        repository.login(activity)
+
+    }
 
 }
