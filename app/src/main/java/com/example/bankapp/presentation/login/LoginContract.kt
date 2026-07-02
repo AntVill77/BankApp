@@ -1,8 +1,23 @@
 package com.example.bankapp.presentation.login
 
-sealed interface LoginIntent {
+object LoginContract {
 
-    data object LoginClicked : LoginIntent
+    data class State(
+        val loading: Boolean = false,
+        val error: String? = null
+    )
 
+    sealed interface Intent {
+        data object LoginClicked : Intent
+    }
+
+    sealed interface Effect {
+
+        data object LaunchOAuth : Effect
+        data object NavigateHome : Effect
+        data class ShowError(
+            val message: String
+        ) : Effect
+    }
 }
 
