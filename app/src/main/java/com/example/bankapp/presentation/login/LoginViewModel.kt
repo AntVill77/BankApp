@@ -1,37 +1,21 @@
 package com.example.bankapp.presentation.login
 
-import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.bankapp.domain.usecase.GetUserUseCase
-import com.example.bankapp.domain.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
 
-    private val loginUseCase: LoginUseCase
 
 ): ViewModel(){
 
-    fun login(activity: Activity) {
+    private val _events = MutableSharedFlow<LoginEvent>()
 
-        loginUseCase(activity)
+    val events = _events.asSharedFlow()
 
+    fun login() {
     }
-    fun test(){
-
-        viewModelScope.launch {
-
-            val user = loginUseCase
-
-            Log.d("USER",user.toString())
-
-        }
-
-    }
-
 }

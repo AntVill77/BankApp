@@ -3,13 +3,16 @@ package com.example.bankapp.core.oauth
 import android.app.Activity
 import android.net.Uri
 import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
 import net.openid.appauth.AuthorizationRequest
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.AuthorizationServiceConfiguration
 import net.openid.appauth.ResponseTypeValues
+import javax.inject.Inject
 
-class OAuthManager(
+class OAuthManager @Inject constructor(
 
+    @ApplicationContext
     private val context: Context
 
 ) {
@@ -17,8 +20,7 @@ class OAuthManager(
     private val authService =
         AuthorizationService(context)
 
-    private lateinit var configuration:
-            AuthorizationServiceConfiguration
+    private var configuration: AuthorizationServiceConfiguration? = null
 
 
     fun loadConfiguration(
@@ -31,26 +33,26 @@ class OAuthManager(
         ) { config, ex ->
 
             if (config != null) {
-
                 configuration = config
-
                 callback(true)
 
             } else {
-
+                ex?.printStackTrace()
                 callback(false)
-
             }
 
         }
 
     }
 
-    fun getRequest():
-            AuthorizationRequest {
+    fun getRequest(): AuthorizationRequest {
+
+        val config = requireNotNull(configuration) {
+            "OAuth configuration has not been loaded."
+        }
         return AuthorizationRequest.Builder(
 
-            configuration,
+            config,
 
             OAuthConfig.CLIENT_ID,
 
