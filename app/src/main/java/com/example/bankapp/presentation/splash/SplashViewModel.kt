@@ -16,33 +16,25 @@ class SplashViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<SplashState>(
-        SplashState.Loading
-    )
+    private val _state = MutableStateFlow(SplashUiState())
+    val state: StateFlow<SplashUiState> = _state
 
-    val state: StateFlow<SplashState> = _state
 
-    init {
-
+  /*  init {
         checkSession()
+    }*/
 
-    }
-
-    private fun checkSession() {
+    fun checkSession() {
 
         viewModelScope.launch {
 
-            val session = checkSessionUseCase()
+            val hasSession = checkSessionUseCase()
 
-            _state.value =
-
-                if (session == null)
-
-                    SplashState.NavigateToLogin
-
-                else
-
-                    SplashState.NavigateToHome
+            _state.value = _state.value.copy(
+                isLoading = false,
+                navigateToHome = hasSession,
+                navigateToLogin = !hasSession
+            )
 
         }
 

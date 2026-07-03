@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -21,12 +22,56 @@ fun BankNavGraph(){
 
     NavHost(
         navController = navController,
+        startDestination = "splash"
+    ) {
+
+        composable("splash") {
+
+            SplashScreen(
+                onNavigateToLogin = {
+                    navController.navigate("login") {
+                        popUpTo("splash") { inclusive = true }
+                    }
+                },
+                onNavigateToHome = {
+                    navController.navigate("home") {
+                        popUpTo("splash") { inclusive = true }
+                    }
+                }
+            )
+
+        }
+
+        composable("login") {
+            LoginScreen(onLoginClick = {})
+        }
+
+        composable("home") {
+            HomeScreen()
+        }
+
+    }
+    /*NavHost(
+        navController = navController,
         startDestination = Destinations.Splash.route
     ){
         composable(Destinations.Splash.route) {
 
             SplashScreen(
-                navController = navController
+                onNavigateToLogin = {
+                    navController.navigate(Destinations.Login.route) {
+                        popUpTo(Destinations.Splash.route) {
+                            inclusive = true
+                        }
+                    }
+                },
+                onNavigateToHome = {
+                    navController.navigate(Destinations.Home.route) {
+                        popUpTo(Destinations.Splash.route) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
 
         }
@@ -56,5 +101,5 @@ fun BankNavGraph(){
 
         }
 
-    }
+    }*/
 }

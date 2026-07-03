@@ -4,11 +4,11 @@ import com.example.bankapp.domain.repository.SessionRepository
 import javax.inject.Inject
 
 class CheckSessionUseCase @Inject constructor(
-
-    private val repository: SessionRepository
-
+    private val sessionRepository: SessionRepository
 ) {
 
-    suspend operator fun invoke() = repository.getSession()
+    suspend operator fun invoke(): Boolean {
+        return sessionRepository.getSession() != null
+    }
 
 }
