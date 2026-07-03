@@ -1,5 +1,7 @@
 package com.example.bankapp.di
 
+import com.example.bankapp.core.network.AuthInterceptor
+import com.example.bankapp.core.network.TokenAuthenticator
 import com.example.bankapp.core.utils.Constants.BASE_URL
 import com.example.bankapp.data.remote.AuthApi
 import dagger.Module
@@ -70,6 +72,19 @@ object NetworkModule {
 
         return retrofit.create(AuthApi::class.java)
 
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        authInterceptor: AuthInterceptor,
+        tokenAuthenticator: TokenAuthenticator
+    ): OkHttpClient {
+
+        return OkHttpClient.Builder()
+            .addInterceptor(authInterceptor)
+            .authenticator(tokenAuthenticator)
+            .build()
     }
 
 }

@@ -12,6 +12,8 @@ import net.openid.appauth.AuthorizationServiceConfiguration
 import net.openid.appauth.ResponseTypeValues
 import net.openid.appauth.TokenRequest
 import net.openid.appauth.TokenResponse
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -99,5 +101,47 @@ class OAuthManager @Inject constructor(
 
         }
 
+    }
+
+    fun refreshToken(
+        refreshToken: String,
+        callback: (TokenResponse?, Throwable?) -> Unit
+    ) {
+
+        val request = TokenRequest.Builder(
+            configuration ?: return,
+            OAuthConfig.CLIENT_ID
+        )
+            .setGrantType("refresh_token")
+            .setRefreshToken(refreshToken)
+            .build()
+
+        authService.performTokenRequest(request) { response, ex ->
+            callback(response, ex)
+        }
+    }
+
+    suspend fun refreshTokenSync(refreshToken: String): TokenResponse? = suspendCancellableCoroutine { continuation ->
+
+        val config = configuration ?: run {
+            continuation.resume(null)
+            return@suspendCancellableCoroutine
+        }
+
+        val request = TokenRequest.Builder(
+            config,
+            OAuthConfig.CLIENT_ID
+        )
+            .setGrantType("refresh_token")
+            .setRefreshToken(refreshToken)
+            .build()
+
+        authService.performTokenRequest(request) { response, _ ->
+            if (response != null) {
+                continuation.resume(response)
+            } else {
+                continuation.resume(null)
+            }
+        }
     }
 }
