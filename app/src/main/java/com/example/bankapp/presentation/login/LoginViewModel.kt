@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,6 +19,10 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     private val _effect = MutableSharedFlow<LoginContract.Effect>()
     val effect = _effect.asSharedFlow()
 
+    private val _events = MutableSharedFlow<LoginUiEvent>()
+
+    val events: SharedFlow<LoginUiEvent> = _events.asSharedFlow()
+
     fun onIntent(intent: LoginContract.Intent){
         when(intent){
             LoginContract.Intent.LoginClicked->{
@@ -27,14 +32,12 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     }
 
     fun login(){
-        _state.value = _state.value.copy(
-                loading = true
-            )
-
         viewModelScope.launch {
-            _effect.emit(
-                LoginContract.Effect.LaunchOAuth
-            )
+
+            _state.value = _state.value.copy(loading = true)
+
+            _events.emit(LoginUiEvent.LaunchOAuth)
+
         }
     }
 }

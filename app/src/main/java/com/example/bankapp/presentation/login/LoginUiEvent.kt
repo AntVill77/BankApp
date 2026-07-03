@@ -10,14 +10,14 @@ package com.example.bankapp.presentation.login
 
 }*/
 
-sealed interface LoginEvent {
+sealed interface LoginUiEvent {
 
-    data object LaunchOAuth : LoginEvent
+    data object LaunchOAuth : LoginUiEvent
 
-    data object NavigateHome : LoginEvent
+    data object NavigateHome : LoginUiEvent
 
     data class ShowError(
         val message:String
-    ):LoginEvent
+    ):LoginUiEvent
 
 }
