@@ -1,9 +1,11 @@
 package com.example.bankapp.core.session
 
-sealed interface AuthState{
+sealed interface AuthState {
 
-    data object Authenticated:AuthState
+    data object Loading : AuthState
 
-    data object NotAuthenticated:AuthState
+    data object Authenticated : AuthState
+
+    data object Unauthenticated : AuthState
 
 }
