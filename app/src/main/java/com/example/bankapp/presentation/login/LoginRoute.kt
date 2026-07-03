@@ -28,12 +28,12 @@ fun LoginRoute(
     viewModel: LoginViewModel = hiltViewModel()
 ) {
 
-    LoginScreen(
+   /* LoginScreen(
         state = viewModel.state.value,
         onLogin = {
             viewModel.onIntent(
                 LoginContract.Intent.LoginClicked
             )
         }
-    )
+    )*/
 }

@@ -3,6 +3,7 @@ package com.example.bankapp.presentation.login
 import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
@@ -13,7 +14,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 
-@SuppressLint("ViewModelConstructorInComposable", "ContextCastToActivity")
+@Composable
+fun LoginScreen() {
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+
+        Text("🔐 Login")
+
+    }
+
+}
+
+/*@SuppressLint("ViewModelConstructorInComposable", "ContextCastToActivity")
 @Composable
 fun LoginScreen(
     state: LoginContract.State,
@@ -38,4 +53,4 @@ fun LoginScreen(
 
     }
 
-}
+}*/
