@@ -11,9 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
-   // private val coordinator: LoginCoordinator
-): ViewModel(){
+class LoginViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(LoginContract.State())
     val state = _state.asStateFlow()
     private val _effect = MutableSharedFlow<LoginContract.Effect>()

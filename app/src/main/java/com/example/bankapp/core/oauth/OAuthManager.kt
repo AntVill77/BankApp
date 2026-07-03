@@ -9,7 +9,9 @@ import net.openid.appauth.AuthorizationService
 import net.openid.appauth.AuthorizationServiceConfiguration
 import net.openid.appauth.ResponseTypeValues
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class OAuthManager @Inject constructor(
 
     @ApplicationContext
