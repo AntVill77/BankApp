@@ -1,4 +1,4 @@
-package com.example.bankapp.data.dto
+package com.example.bankapp.data.remote.dto
 
 data class UserResponse(
 

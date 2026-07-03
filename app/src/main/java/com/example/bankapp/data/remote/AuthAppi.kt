@@ -1,6 +1,6 @@
 package com.example.bankapp.data.remote
 
-import com.example.bankapp.data.dto.UserResponse
+import com.example.bankapp.data.remote.dto.UserResponse
 import retrofit2.http.GET
 
 interface AuthApi {
