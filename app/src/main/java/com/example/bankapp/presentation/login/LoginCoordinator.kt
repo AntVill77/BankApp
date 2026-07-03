@@ -14,7 +14,7 @@ class LoginCoordinator @Inject constructor(
         activity: Activity
     ) {
 
-        oauthManager.login(activity)
+       // oauthManager.login(activity)
 
     }
 

@@ -26,7 +26,7 @@ fun BankNavGraph(){
 
         composable(Destinations.Login.route) {
 
-            LoginScreen()
+            LoginScreen(onLoginClick = {})
 
         }
 

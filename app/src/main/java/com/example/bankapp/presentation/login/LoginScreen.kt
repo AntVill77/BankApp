@@ -1,56 +1,62 @@
 package com.example.bankapp.presentation.login
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
-@Composable
-fun LoginScreen() {
-
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-
-        Text("🔐 Login")
-
-    }
-
-}
-
-/*@SuppressLint("ViewModelConstructorInComposable", "ContextCastToActivity")
 @Composable
 fun LoginScreen(
-    state: LoginContract.State,
-    onLogin:()->Unit
-){
-    val activity = LocalContext.current as Activity
+    viewModel: LoginViewModel = hiltViewModel(),
+    onLoginClick: () -> Unit
+) {
+
+    val state by viewModel.state.collectAsState()
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-    ){
+    ) {
+        Text(
+            text = "Bank App",
+            style = MaterialTheme.typography.headlineMedium
+        )
+
+        Text(
+            text = "OAuth 2.0 + Keycloak",
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+
         Button(
-            onClick = onLogin
+            modifier = Modifier
+                .fillMaxWidth(),
+            onClick = {
+                //onLoginClick()
+             viewModel.login()
+            }
         ){
             Text("Iniciar sesión")
         }
 
-        if(state.loading){
-            CircularProgressIndicator()
-        }
+        if (state.loading) {
 
+            CircularProgressIndicator()
+
+        }
     }
 
-}*/
+}

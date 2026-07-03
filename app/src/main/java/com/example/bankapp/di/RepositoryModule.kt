@@ -1,6 +1,5 @@
 package com.example.bankapp.di
 
-import com.example.bankapp.data.repository.AuthRepositoryImpl
 import com.example.bankapp.data.repository.SessionRepositoryImpl
 import com.example.bankapp.domain.repository.SessionRepository
 import dagger.Binds

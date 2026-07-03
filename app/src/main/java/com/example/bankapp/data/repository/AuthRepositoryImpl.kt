@@ -6,6 +6,7 @@ import com.example.bankapp.data.remote.AuthApi
 import com.example.bankapp.domain.repository.AuthRepository
 import javax.inject.Inject
 
+/*
 class AuthRepositoryImpl @Inject constructor(
 
     private val oauthManager: OAuthManager
@@ -18,4 +19,4 @@ class AuthRepositoryImpl @Inject constructor(
 
     }
 
-}
+}*/

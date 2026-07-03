@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SessionRepositoryImpl @Inject constructor(
-    private var tokenStorage: TokenStorage
+    private val tokenStorage: TokenStorage
 ) : SessionRepository {
 
     override suspend fun getSession(): AuthSession? {
